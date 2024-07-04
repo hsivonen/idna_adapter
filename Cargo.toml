@@ -3,7 +3,7 @@ name = "idna_adapter"
 version = "0.0.0"
 edition = "2021"
 license = "Apache-2.0 OR MIT"
-authors = ["Henri Sivonen <hsivonen@hsivonen.fi>"]
+authors = ["The rust-url developers"]
 readme = "README.md"
 description = "Back end adapter for idna"
 
