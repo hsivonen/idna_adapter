@@ -8,8 +8,6 @@ readme = "README.md"
 description = "Back end adapter for idna"
 
 [dependencies]
-icu_normalizer = "1.4.3"
-icu_properties = "1.4.2"
 
 [features]
-compiled_data = ["icu_normalizer/compiled_data", "icu_properties/compiled_data"]
+compiled_data = []
