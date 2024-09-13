@@ -22,8 +22,8 @@
 
 #![no_std]
 
-use icu_normalizer::properties::CanonicalCombiningClassMap;
-use icu_normalizer::uts46::Uts46Mapper;
+use icu_normalizer::properties::CanonicalCombiningClassMapBorrowed;
+use icu_normalizer::uts46::Uts46MapperBorrowed;
 use icu_properties::maps::CodePointMapDataBorrowed;
 use icu_properties::CanonicalCombiningClass;
 use icu_properties::GeneralCategory;
@@ -203,8 +203,8 @@ impl BidiClassMask {
 
 /// An adapter between a Unicode back end an the `idna` crate.
 pub struct Adapter {
-    mapper: Uts46Mapper,
-    canonical_combining_class: CanonicalCombiningClassMap,
+    mapper: Uts46MapperBorrowed<'static>,
+    canonical_combining_class: CanonicalCombiningClassMapBorrowed<'static>,
     general_category: CodePointMapDataBorrowed<'static, GeneralCategory>,
     bidi_class: CodePointMapDataBorrowed<'static, icu_properties::BidiClass>,
     joining_type: CodePointMapDataBorrowed<'static, icu_properties::JoiningType>,
@@ -223,8 +223,8 @@ impl Adapter {
     #[inline(always)]
     pub const fn new() -> Self {
         Self {
-            mapper: Uts46Mapper::new(),
-            canonical_combining_class: CanonicalCombiningClassMap::new(),
+            mapper: Uts46MapperBorrowed::new(),
+            canonical_combining_class: CanonicalCombiningClassMapBorrowed::new(),
             general_category: icu_properties::maps::general_category(),
             bidi_class: icu_properties::maps::bidi_class(),
             joining_type: icu_properties::maps::joining_type(),
