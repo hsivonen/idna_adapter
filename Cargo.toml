@@ -10,7 +10,6 @@ description = "Back end adapter for idna"
 [dependencies]
 idna_mapping = { path = "../idna_mapping" }
 unicode-bidi = { version = "0.3.10", default-features = false, features = ["hardcoded-data"] }
-unicode-joining-type = "0.7.0"
 unicode-normalization = { version = "0.1.22", default-features = false }
 
 [features]

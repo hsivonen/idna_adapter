@@ -20,22 +20,13 @@
 
 use unicode_normalization::UnicodeNormalization;
 
-/// Turns a joining type into a mask for comparing with multiple type at once.
-const fn joining_type_to_mask(jt: unicode_joining_type::JoiningType) -> u32 {
-    1u32 << (jt as u32)
-}
+/// Mask for checking for both left and dual joining.
+pub const LEFT_OR_DUAL_JOINING_MASK: JoiningTypeMask =
+    JoiningTypeMask(idna_mapping::LEFT_OR_DUAL_JOINING_MASK);
 
 /// Mask for checking for both left and dual joining.
-pub const LEFT_OR_DUAL_JOINING_MASK: JoiningTypeMask = JoiningTypeMask(
-    joining_type_to_mask(unicode_joining_type::JoiningType::LeftJoining)
-        | joining_type_to_mask(unicode_joining_type::JoiningType::DualJoining),
-);
-
-/// Mask for checking for both left and dual joining.
-pub const RIGHT_OR_DUAL_JOINING_MASK: JoiningTypeMask = JoiningTypeMask(
-    joining_type_to_mask(unicode_joining_type::JoiningType::RightJoining)
-        | joining_type_to_mask(unicode_joining_type::JoiningType::DualJoining),
-);
+pub const RIGHT_OR_DUAL_JOINING_MASK: JoiningTypeMask =
+    JoiningTypeMask(idna_mapping::RIGHT_OR_DUAL_JOINING_MASK);
 
 /// Turns a bidi class into a mask for comparing with multiple classes at once.
 const fn bidi_class_to_mask(bc: unicode_bidi::BidiClass) -> u32 {
@@ -102,19 +93,19 @@ pub const MIDDLE_RTL_MASK: BidiClassMask = BidiClassMask(
 /// Value for the Joining_Type Unicode property.
 #[repr(transparent)]
 #[derive(Clone, Copy)]
-pub struct JoiningType(unicode_joining_type::JoiningType);
+pub struct JoiningType(idna_mapping::JoiningType);
 
 impl JoiningType {
     /// Returns the corresponding `JoiningTypeMask`.
     #[inline(always)]
     pub fn to_mask(self) -> JoiningTypeMask {
-        JoiningTypeMask(joining_type_to_mask(self.0))
+        JoiningTypeMask(self.0.to_mask())
     }
 
     // `true` iff this value is the Transparent value.
     #[inline(always)]
     pub fn is_transparent(self) -> bool {
-        self.0 == unicode_joining_type::JoiningType::Transparent
+        self.0.is_transparent()
     }
 }
 
@@ -122,13 +113,13 @@ impl JoiningType {
 /// values.
 #[repr(transparent)]
 #[derive(Clone, Copy)]
-pub struct JoiningTypeMask(u32);
+pub struct JoiningTypeMask(idna_mapping::JoiningTypeMask);
 
 impl JoiningTypeMask {
     /// `true` iff both masks have at `JoiningType` in common.
     #[inline(always)]
     pub fn intersects(self, other: JoiningTypeMask) -> bool {
-        self.0 & other.0 != 0
+        self.0.intersects(other.0)
     }
 }
 
@@ -224,7 +215,7 @@ impl Adapter {
     /// Returns the Joining_Type of `c`.
     #[inline(always)]
     pub fn joining_type(&self, c: char) -> JoiningType {
-        JoiningType(unicode_joining_type::get_joining_type(c))
+        JoiningType(idna_mapping::joining_type(c))
     }
 
     /// See the [method of the same name in `icu_normalizer`][1] for the
