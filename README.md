@@ -6,6 +6,8 @@ To work around the lack of [`global-features`](https://internals.rust-lang.org/t
 
 `idna` depends on version 1 of this crate. The version stream 1.2.x uses ICU4X, the version stream 1.1.x uses unicode-rs, and the version stream 1.0.x has a stub implementation without an actual Unicode back end.
 
+It is generally a good idea to refer to the [README of the latest version](https://docs.rs/crate/idna_adapter/latest) instead of the guidance below for up-to-date information about what options are available.
+
 ## ICU4X as the default
 
 If you take no action, Cargo will choose the 1.2.x version stream i.e. ICU4X.
