@@ -8,13 +8,15 @@ version = "0.0.0"
 dependencies = [
  "idna_mapping",
  "unicode-bidi",
- "unicode-joining-type",
  "unicode-normalization",
 ]
 
 [[package]]
 name = "idna_mapping"
 version = "0.0.0"
+dependencies = [
+ "unicode-joining-type",
+]
 
 [[package]]
 name = "tinyvec"
