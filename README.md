@@ -23,3 +23,7 @@ Compared to ICU4X, this makes build times faster, MSRV lower, binary size larger
 Since the ability to turn off actual IDNA processing has been requested again and again, an option to have no Unicode back end is provided. Choosing this option obviously breaks the `idna` crate in the sense that it cannot provide a proper implementation of UTS 46 without any Unicode data. Choosing this option makes your application reject non-ASCII domain name inputs and will fail to enforce the UTS 46 requirements on domain names that have labels in the Punycode form.
 
 Using this option is not recommended, but to make the `idna` crate not actually support IDNA, run `cargo update -p idna_adapter --precise 1.0.0` in the top-level directory of your application.
+
+## License
+
+Apache-2.0 OR MIT
