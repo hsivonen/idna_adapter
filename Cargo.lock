@@ -4,7 +4,7 @@ version = 3
 
 [[package]]
 name = "idna_adapter"
-version = "0.0.0"
+version = "1.1.0"
 dependencies = [
  "idna_mapping",
  "unicode-bidi",
@@ -13,7 +13,9 @@ dependencies = [
 
 [[package]]
 name = "idna_mapping"
-version = "0.0.0"
+version = "1.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d5422cc5bc64289a77dbb45e970b86b5e9a04cb500abc7240505aedc1bf40f38"
 dependencies = [
  "unicode-joining-type",
 ]
