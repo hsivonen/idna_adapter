@@ -1,6 +1,6 @@
 [package]
 name = "idna_adapter"
-version = "0.0.0" # Change to 1.2.1 before publishing
+version = "1.2.1-beta.1"
 rust-version = "1.71.1" # Match ICU4X 2.0
 edition = "2021"
 license = "Apache-2.0 OR MIT"
@@ -11,11 +11,11 @@ categories = ["no-std", "internationalization"]
 keywords = ["unicode", "dns", "idna"]
 documentation = "https://docs.rs/idna_adapter/latest/idna_adapter/"
 homepage = "https://docs.rs/crate/idna_adapter/latest" # README link
-repository = "https://github.com/hsivonen/idna_adapter" # Change to servo if accepted
+repository = "https://github.com/hsivonen/idna_adapter"
 
 [dependencies]
-icu_normalizer = "2.0.0-beta1"
-icu_properties = "2.0.0-beta1"
+icu_normalizer = "=2.0.0-beta1"
+icu_properties = "=2.0.0-beta1"
 
 [features]
 compiled_data = ["icu_normalizer/compiled_data", "icu_properties/compiled_data"]
