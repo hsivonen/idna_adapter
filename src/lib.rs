@@ -29,7 +29,7 @@ use icu_properties::CodePointMapDataBorrowed;
 
 /// Turns a joining type into a mask for comparing with multiple type at once.
 const fn joining_type_to_mask(jt: icu_properties::props::JoiningType) -> u32 {
-    1u32 << jt.0
+    1u32 << jt.to_icu4c_value()
 }
 
 /// Mask for checking for both left and dual joining.
@@ -46,7 +46,7 @@ pub const RIGHT_OR_DUAL_JOINING_MASK: JoiningTypeMask = JoiningTypeMask(
 
 /// Turns a bidi class into a mask for comparing with multiple classes at once.
 const fn bidi_class_to_mask(bc: icu_properties::props::BidiClass) -> u32 {
-    1u32 << bc.0
+    1u32 << bc.to_icu4c_value()
 }
 
 /// Mask for checking if the domain is a bidi domain.
